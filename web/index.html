@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Movie Recommender</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div>
+          <h1>Movie Recommender</h1>
+          <p class="subtitle">Hybrid ML demo (collab + content) using MovieLens.</p>
+        </div>
+        <div class="pill" id="healthPill">Checking server…</div>
+      </header>
+
+      <main class="grid">
+        <section class="card">
+          <h2>Find a movie for you</h2>
+          <div class="form">
+            <label>
+              <span>Your name</span>
+              <input id="userName" type="text" placeholder="Enter your name" />
+            </label>
+            <label>
+              <span>Your favourite movie</span>
+              <input id="favoriteMovie" type="text" placeholder="Type to search movies..." autocomplete="off" />
+              <div id="movieDropdown" class="dropdown"></div>
+            </label>
+            <label>
+              <span>What kind of recommendation do you want?</span>
+              <div class="pref-row">
+                <label class="pref-option">
+                  <input type="radio" name="prefType" value="very-close" checked />
+                  <span>Very close to my favourite movie</span>
+                </label>
+                <label class="pref-option">
+                  <input type="radio" name="prefType" value="similar" />
+                  <span>Similar, with more variety</span>
+                </label>
+              </div>
+            </label>
+            <label>
+              <span>Similarity method</span>
+              <select id="simMethod">
+                <option value="content">
+                  Content-based (looks at title &amp; genres)
+                </option>
+                <option value="collab">
+                  Collaborative (what similar people liked)
+                </option>
+                <option value="hybrid" selected>
+                  Hybrid (mix of content &amp; collab)
+                </option>
+              </select>
+            </label>
+            <label>
+              <span>How many movies?</span>
+              <input id="topNUserSimple" type="number" min="1" max="20" value="10" />
+            </label>
+            <div class="hint">
+              We will tune the model based on your preference.
+            </div>
+            <button id="btnUserSimple" class="btn primary">Get my recommendations</button>
+            <div class="error" id="errUserSimple"></div>
+          </div>
+
+          <div id="topPicksTitle" class="top-picks-title">HERE ARE YOUR TOP PICKS!!!</div>
+          <div id="explanation" class="explanation-text"></div>
+          <ol class="results" id="resultsUserSimple"></ol>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div>
+          Run the server with <code>python .\server.py</code> then open
+          <code>http://127.0.0.1:8000/</code>.
+        </div>
+      </footer>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
